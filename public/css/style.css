@@ -1,8 +1,13 @@
 body {
 	font-family: 'Raleway', sans-serif;
+<<<<<<< HEAD
 	font-weight: 400;
 	background-color: rgb(248, 244, 238);
 	color: rgb(73, 64, 52);
+=======
+	background-color: rgb(248, 244, 238);
+	color: rgb(42, 40, 37);
+>>>>>>> 3ce1c4d39a97e3f3dad4bb875a22fb4ca20ea5df
 	font-size:20px;
 }
 
