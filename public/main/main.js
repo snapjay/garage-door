@@ -16,17 +16,10 @@ angular.module('gDoor.main', ['ngRoute'])
         });
     }])
     .controller('mainCtrl', ['$scope', '$http', 'isOpen', function($scope, $http, isOpen) {
-<<<<<<< HEAD
-
-        $scope.isOpen = isOpen;
-
-        $scope.detectedStatus = isOpen;
-=======
         var fireActions = firebase.database().ref('actions');
         $scope.isOpen = isOpen;
         $scope.detectedStatus = isOpen;
 
->>>>>>> 3ce1c4d39a97e3f3dad4bb875a22fb4ca20ea5df
         //console.log (firebase.auth().currentUser.uid);
 
 //    elDoor.one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function(e) {
@@ -37,24 +30,6 @@ angular.module('gDoor.main', ['ngRoute'])
 //            }
 //        });
 
-<<<<<<< HEAD
-        var fireActions = firebase.database().ref('actions');
-        fireActions.limitToLast(1).on('child_added', function(data) {
-
-            $scope.detectedStatus = data.val().action;
-            $scope.isOpen = data.val().action;
-            console.log($scope);
-            console.log(data.val());
-            $scope.$apply();
-        });
-
-
-        $scope.setDoor = function(state){
-            $http.get('exec/action')
-                .then(function(data){
-                    $scope.isOpen = !$scope.isOpen;
-                    console.log (data.data.isOpen);
-=======
 
         fireActions.limitToLast(1).on('child_added', function(data) {
 
@@ -82,7 +57,6 @@ angular.module('gDoor.main', ['ngRoute'])
             $http.get('exec/action')
                 .then(function(data){
                     console.log (data.data.result);
->>>>>>> 3ce1c4d39a97e3f3dad4bb875a22fb4ca20ea5df
                 })
         }
 
