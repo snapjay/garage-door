@@ -1,0 +1,12 @@
+{
+  "name": "garage-door",
+  "description": "Garage Door Opener",
+  "version": "0.0.0",
+  "homepage": "https://github.com/snapjay/garage-door",
+  "license": "BSD-2-Clause",
+  "private": true,
+  "dependencies": {
+    "angular": "~1.5.0",
+    "angular-route": "^1.5.8"
+  }
+}
