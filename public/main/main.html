@@ -7,15 +7,14 @@
                 <p>Press button to activate the garage door.</p>
                 <button id="btnOpen" class="btn btn-primary btn-lg" ng-disabled="isOpen" ng-click="setDoor('open')">Open</button>
                 <button id="btnClose" class="btn btn-primary btn-lg"  ng-disabled="!isOpen" ng-click="setDoor('close')">Close</button>
-<<<<<<< HEAD
-                <br>
-                <br>
-                <div>Detected Status (isOpen): {{ detectedStatus }} </div>
-=======
                 <br />
                 <br />
-                <div>Detected Status: <span ng-show="detectedStatus">Open</span><span ng-show="!detectedStatus">Closed</span>  at {{ detected.date | date:'hh:mm:ssa' }} </div>
->>>>>>> 3ce1c4d39a97e3f3dad4bb875a22fb4ca20ea5df
+
+                <div>Detected Status:
+                    <span ng-show="detectedStatus">Open</span>
+                    <span ng-show="!detectedStatus">Closed</span>
+                    at {{ detected.date | date:'hh:mm:ssa' }} </div>
+
             </div>
             <div class="col-sm-6">
                 <div class="garage">
