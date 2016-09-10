@@ -16,10 +16,10 @@ angular.module('gDoor.main', ['ngRoute'])
         });
     }])
     .controller('mainCtrl', ['$scope', '$http', 'isOpen', function($scope, $http, isOpen) {
-
+        var fireActions = firebase.database().ref('actions');
         $scope.isOpen = isOpen;
-
         $scope.detectedStatus = isOpen;
+
         //console.log (firebase.auth().currentUser.uid);
 
 //    elDoor.one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function(e) {
@@ -30,22 +30,33 @@ angular.module('gDoor.main', ['ngRoute'])
 //            }
 //        });
 
-        var fireActions = firebase.database().ref('actions');
+
         fireActions.limitToLast(1).on('child_added', function(data) {
 
-            $scope.detectedStatus = data.val().action;
-            $scope.isOpen = data.val().action;
-            console.log($scope);
-            console.log(data.val());
-            $scope.$apply();
+            if (data.val().user != firebase.auth().currentUser.uid) {  // nevermind; I did it!
+                $scope.detected = data.val();
+                $scope.detectedStatus = data.val().action;
+                $scope.isOpen = data.val().action;
+                $scope.$apply();
+            }
+
         });
 
+        navigator.geolocation.getCurrentPosition(function(position) {
+            console.log(position.coords.latitude, position.coords.longitude);
+        });
 
         $scope.setDoor = function(state){
+            fireActions.push({
+                user: firebase.auth().currentUser.uid,
+                date: new Date().getTime(),
+                action : state
+            });
+
+            $scope.isOpen = !$scope.isOpen;
             $http.get('exec/action')
                 .then(function(data){
-                    $scope.isOpen = !$scope.isOpen;
-                    console.log (data.data.isOpen);
+                    console.log (data.data.result);
                 })
         }
 
