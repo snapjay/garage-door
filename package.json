@@ -1,0 +1,29 @@
+{
+  "name": "garage-door",
+  "version": "0.0.0",
+  "description": "Garage Door",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "startdev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/snapjay/garage-door.git"
+  },
+  "author": "Dan Shreim",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/snapjay/garage-door/issues"
+  },
+  "dependencies": {
+    "angular-route": "^1.5.8",
+    "bootstrap": "^3.3.7",
+    "express": "^4.14.0",
+    "firebase": "^3.3.2"
+  },
+  "devDependencies": {
+    "nodemon": "^1.10.2"
+  }
+}

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en"  ng-app="gDoor" >
+<title>Garage Door Opener</title>
+<meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css?family=Raleway:100" rel="stylesheet">
+<link rel="icon" type="image/png" href="img/icons/Icon-16.png">
+<link rel="icon" sizes="192x192" href="img/icons/launcher-icon-4x.png">
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/style.css">
+<link rel="manifest" href="../manifest.json">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<body>
+
+<div ng-view></div>
+
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-route.js"></script>
+<script src="//www.gstatic.com/firebasejs/3.3.2/firebase.js"></script>
+<script>
+    var config = {
+        apiKey: "AIzaSyB1Z14N6PLt1Wa7hcM5NjxsfWOHXKLBRxo",
+        authDomain: "garage-door-9135e.firebaseapp.com",
+        databaseURL: "https://garage-door-9135e.firebaseio.com",
+        storageBucket: "garage-door-9135e.appspot.com"
+    };
+
+    firebase.initializeApp(config);
+    firebase.auth().signInWithEmailAndPassword('dan@snapjay.com', 'qwerty').catch(function(error) {
+        console.log (error);
+    });
+</script>
+<script type="application/javascript" src="app.js"></script>
+<script type="application/javascript" src="main/main.js"></script>
+</body>
+</html>

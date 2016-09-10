@@ -1,0 +1,65 @@
+body {
+	font-family: 'Raleway', sans-serif;
+	font-weight: 400;
+	background-color: rgb(248, 244, 238);
+	color: rgb(73, 64, 52);
+	font-size:20px;
+}
+
+h2 {
+    font-size:30px;
+	font-weight:bold;
+    background-color:rgb(227, 102, 13);
+    padding:10px 20px;
+    color:#fff;
+    margin-top: 0;
+    margin-bottom:20px;
+}
+
+.button {
+    background-color:rgb(227, 102, 13);
+    color: #fff;
+    padding:20px;
+    font-size: 20px;
+    text-align:center;
+    display:inline-block;
+    border-radius: 5px;
+}
+
+
+.garage {
+    width:385px;
+    margin-top:  20px;
+    position: relative;
+}
+
+.garage #jeep_lower, .garage #jeep_upper {
+    fill: #542B0F;
+}
+.door {
+    position: absolute;
+    width: 247px;
+    left: 71px;
+    top: 93px;
+    overflow: hidden;
+    height: 153px;
+}
+
+.door svg {
+    top: -1px;
+    position: absolute;
+    -webkit-transition-timing-function: linear; /* Safari and Chrome */
+    transition-timing-function: linear;
+    -webkit-transition: top 13s, -webkit-transform 13s;
+    transition:  top 13s, -webkit-transform 13s;
+}
+
+.door svg.open {
+    top: -147px;
+}
+
+svg path, svg rect {
+    fill:  rgb(227, 102, 13);
+}
+
+.door .handle{fill:#FFFFFF;}
