@@ -39,7 +39,7 @@ function _execStatus(req, res){
 }
 
 function _execAction(req, res){
-    var script= ("python " + __dirname + "/scripts/servo.py");
+    var script= ("python " + __dirname + "/scripts/relay.py");
     var child = exec(script, function (error, stdout, stderr) {
 
         var status = (stdout.trim() == 'done');
