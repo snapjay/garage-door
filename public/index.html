@@ -7,16 +7,36 @@
 <link rel="icon" sizes="192x192" href="img/icons/launcher-icon-4x.png">
 <link rel="stylesheet" href="css/bootstrap.min.css">
 <link rel="stylesheet" href="css/style.css">
-<link rel="manifest" href="../manifest.json">
+<link rel="stylesheet" href="bower_components/angular-snap/angular-snap.css">
+<link rel="manifest" href="manifest.json">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <body>
 
-<div ng-view></div>
+<snap-drawer>
+   <ul>
+       <li><a href="#!/login">Login</a></li>
+       <li><a href="#!/">Main</a></li>
+       <li><a href="#!/logs">Logs</a></li>
+   </ul>
+</snap-drawer>
+
+<snap-content>
+
+
+
+    <h2>
+        <svg  class="burger" snap-toggle="left" style="enable-background:new 0 0 32 32;" version="1.1" viewBox="0 0 32 32" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M4,10h24c1.104,0,2-0.896,2-2s-0.896-2-2-2H4C2.896,6,2,6.896,2,8S2.896,10,4,10z M28,14H4c-1.104,0-2,0.896-2,2  s0.896,2,2,2h24c1.104,0,2-0.896,2-2S29.104,14,28,14z M28,22H4c-1.104,0-2,0.896-2,2s0.896,2,2,2h24c1.104,0,2-0.896,2-2  S29.104,22,28,22z"/></svg>
+        Garage Door Opener</h2>
+
+    <div ng-view ></div>
+
+</snap-content>
 
 <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-route.js"></script>
 <script src="//www.gstatic.com/firebasejs/3.3.2/firebase.js"></script>
+<script src="https://cdn.firebase.com/libs/angularfire/2.0.2/angularfire.min.js"></script>
 <script>
     var config = {
         apiKey: "AIzaSyB1Z14N6PLt1Wa7hcM5NjxsfWOHXKLBRxo",
@@ -30,7 +50,11 @@
         console.log (error);
     });
 </script>
+<script type="application/javascript" src="bower_components/snapjs/snap.js"></script>
+<script type="application/javascript" src="bower_components/angular-snap/angular-snap.js"></script>
 <script type="application/javascript" src="app.js"></script>
 <script type="application/javascript" src="main/main.js"></script>
+<script type="application/javascript" src="login/login.js"></script>
+<script type="application/javascript" src="logs/logs.js"></script>
 </body>
 </html>

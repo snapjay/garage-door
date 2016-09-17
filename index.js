@@ -93,7 +93,10 @@ function checkStatus(){
 }
 checkStatus();
 
+app.use('/bower_components', express.static(path.join(__dirname, 'bower_components')));
 app.use('/', express.static(path.join(__dirname, 'public')));
+
+
 
 
 app.listen(port, function () {

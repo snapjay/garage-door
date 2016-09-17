@@ -6,6 +6,7 @@ angular.module('gDoor.main', ['ngRoute'])
             controller: 'mainCtrl',
             resolve: {
                 isOpen: ['$http', function($http){
+
                     return $http.get('exec/status')
                                 .then(function(data){
                                     return data.data.isOpen;
@@ -15,12 +16,13 @@ angular.module('gDoor.main', ['ngRoute'])
             }
         });
     }])
+
     .controller('mainCtrl', ['$scope', '$http', 'isOpen', function($scope, $http, isOpen) {
         var fireActions = firebase.database().ref('actions');
         $scope.isOpen = isOpen;
         $scope.detectedStatus = isOpen;
 
-        //console.log (firebase.auth().currentUser.uid);
+//    console.log (firebase.auth().currentUser.uid);
 
 //    elDoor.one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function(e) {
 //            if (state == 'open') {
@@ -37,7 +39,6 @@ angular.module('gDoor.main', ['ngRoute'])
                 $scope.detected = data.val();
                 $scope.detectedStatus = data.val().action;
                 $scope.isOpen = data.val().action;
-                $scope.$apply();
             }
 
         });
