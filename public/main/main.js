@@ -11,18 +11,20 @@ angular.module('gDoor.main', ['ngRoute'])
                                 .then(function(data){
                                     return data.data.isOpen;
                                 })
+                }],
+
+                currentAuth: ['$firebaseAuth', function($firebaseAuth) {
+                    return $firebaseAuth().$requireSignIn();
                 }]
 
             }
         });
     }])
 
-    .controller('mainCtrl', ['$scope', '$http', 'isOpen', function($scope, $http, isOpen) {
+    .controller('mainCtrl', ['$scope', '$http', 'isOpen', 'currentAuth', function($scope, $http, isOpen, currentAuth) {
         var fireActions = firebase.database().ref('actions');
         $scope.isOpen = isOpen;
         $scope.detectedStatus = isOpen;
-
-//    console.log (firebase.auth().currentUser.uid);
 
 //    elDoor.one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function(e) {
 //            if (state == 'open') {
@@ -32,10 +34,9 @@ angular.module('gDoor.main', ['ngRoute'])
 //            }
 //        });
 
-
         fireActions.limitToLast(1).on('child_added', function(data) {
 
-            if (data.val().user != firebase.auth().currentUser.uid) {  // nevermind; I did it!
+            if (data.val().user != currentAuth.uid) {  // nevermind; I did it!
                 $scope.detected = data.val();
                 $scope.detectedStatus = data.val().action;
                 $scope.isOpen = data.val().action;
@@ -49,7 +50,8 @@ angular.module('gDoor.main', ['ngRoute'])
 
         $scope.setDoor = function(state){
             fireActions.push({
-                user: firebase.auth().currentUser.uid,
+                user: currentAuth.uid,
+                email: currentAuth.email,
                 date: new Date().getTime(),
                 action : state
             });

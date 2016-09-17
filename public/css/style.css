@@ -5,7 +5,7 @@ body, .snap-content {
 	font-size:20px;
 }
 
-h2 {
+h1 {
     font-size:30px;
 	font-weight:bold;
     background-color:rgb(227, 102, 13);
@@ -24,6 +24,14 @@ h2 {
 
 .burger path {
     fill: #fff;
+}
+.btn-primary {
+    background-color:rgb(227, 102, 13);
+    border-color: rgb(174, 80, 10);
+}
+
+.btn-primary:hover, .btn-primary:active {
+     background-color: rgb(174, 80, 10);
 }
 
 .button {
