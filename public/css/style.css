@@ -89,5 +89,26 @@ svg path, svg rect {
     -webkit-box-shadow: 4px 0px 16px -5px rgba(0,0,0,0.75);
     -moz-box-shadow: 4px 0px 16px -5px rgba(0,0,0,0.75);
     box-shadow: 4px 0px 16px -5px rgba(0,0,0,0.75);
+}
 
+.snap-drawer ul.nav {
+    margin: 0;
+    padding: 0;
+}
+
+.snap-drawer ul.nav li {
+    list-style-type: none;
+}
+.snap-drawer ul.nav li a {
+    display: block;
+    padding: 10px;
+    cursor: pointer;
+    text-decoration:  none;
+    color: rgb(42, 40, 37);
+    font-weight: bold;
+
+}
+.snap-drawer ul.nav li a:hover{
+    background-color: #eee;
+    color: rgb(42, 40, 37);
 }

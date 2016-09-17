@@ -17,7 +17,14 @@ angular.module('gDoor', [
     $routeProvider.otherwise({redirectTo: '/'});
 }])
 
-.run(["$rootScope", "$location", '$firebaseAuth', function($rootScope, $location, $firebaseAuth) {
+.run(["$rootScope", "$location", '$firebaseAuth', 'snapRemote', function($rootScope, $location, $firebaseAuth, snapRemote) {
+
+    $rootScope.$on("$routeChangeSuccess", function(event, next, previous, error) {
+        snapRemote.getSnapper().then(function (snapper) {
+            snapper.close();
+        });
+    })
+
 
     $rootScope.$on("$routeChangeError", function(event, next, previous, error) {
         if (error === "AUTH_REQUIRED") {
