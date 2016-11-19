@@ -7,7 +7,7 @@ angular.module('gDoor.main', ['ngRoute'])
             resolve: {
                 isOpen: ['$http', function($http){
 
-                    return $http.get('exec/status')
+                    return $http.get('api/getStatus')
                                 .then(function(data){
                                     return data.data.isOpen;
                                 })
@@ -57,7 +57,7 @@ angular.module('gDoor.main', ['ngRoute'])
             });
 
             $scope.isOpen = !$scope.isOpen;
-            $http.get('exec/action')
+            $http.get('api/action')
                 .then(function(data){
                     console.log (data.data.result);
                 })

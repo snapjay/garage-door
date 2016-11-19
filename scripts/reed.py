@@ -2,17 +2,21 @@
 import time
 import RPi.GPIO as GPIO
 
-reedPin = 12
+openPin = 12
+closedPin = 11
+
 GPIO.setmode(GPIO.BOARD)
-GPIO.setup(reedPin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(openPin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(closedPin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
-inputState = GPIO.input(reedPin)
+openState = GPIO.input(openPin)
+closedState = GPIO.input(closedPin)
 
-if inputState == False:
-        
+if openState == True:
         print('open')
-else:
-        print('closed')
-        
 
-                
+elif closedState == True:
+        print('closed')
+
+else:
+        print('transition')
