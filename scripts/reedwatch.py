@@ -15,7 +15,7 @@ while True:
     openState = GPIO.input(openPin)
     closedState = GPIO.input(closedPin)
 
-    print ('OPEN:' + str(_openState) + ' CLOSED: ' + str(_closedState))
+    print ('OPEN:' + str(openState) + ' CLOSED: ' + str(closedState))
 
     if openState and closedState:
         newState = 'transition'
