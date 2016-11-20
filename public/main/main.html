@@ -2,14 +2,13 @@
     <div class="row">
         <div class="col-sm-6">
             <p>Press button to activate the garage door.</p>
-            <button id="btnOpen" class="btn btn-primary btn-lg"
-                     ng-click="setDoor(true)">Activate</button>
+            <button id="btnOpen" class="btn btn-primary btn-lg activate"
+                     ng-click="setDoor()">Activate</button>
 
-            <br />
-            <br />
 
-            <div>
-                Status: {{ status }}
+
+            <div style="margin: 28px 0">
+                Status: {{ status | titlecase }}
             </div>
 
         </div>
@@ -18,7 +17,7 @@
 
                 <div class="door">
                     <svg version="1.1" id="door" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
- viewBox="0 0 149 88" style="enable-background:new 0 0 149 88;" xml:space="preserve" ng-class="{open:isOpen}">
+ viewBox="0 0 149 88" style="enable-background:new 0 0 149 88;" xml:space="preserve" ng-class="{open:doorState}">
 
     <rect class="handle" width="149" height="87.8"/>
     <rect x="3" y="2"  width="143" height="6"/>

@@ -1,10 +1,11 @@
 const routes = require('express').Router();
 const exec = require('child_process').exec;
 
+var scriptPath = "python " + __dirname + "/../../scripts/";
 
 routes.get('/getStatus', function(req, res)  {
 
-        var script= ("python " + __dirname + "/../../scripts/reed.py");
+        var script= (scriptPath + "reed.py");
 
         //https://dzone.com/articles/execute-unix-command-nodejs/
         var child = exec(script, function (error, stdout, stderr) {
@@ -21,7 +22,7 @@ routes.get('/getStatus', function(req, res)  {
 });
 
 routes.get('/action', function(req, res)  {
-    var script= ("python " + __dirname + "/../../scripts/relay.py");
+    var script= (scriptPath + "relay.py");
     var child = exec(script, function (error, stdout, stderr) {
 
         var status = (stdout.trim() == 'done');

@@ -25,12 +25,28 @@ angular.module('gDoor.main', ['ngRoute'])
         function($scope, $http, initStatus, currentAuth, mySocket) {
         var fireActions = firebase.database().ref('actions');
 
-     //   $scope.status = initStatus;
         $scope.status = initStatus;
+        $scope.doorState = $scope.status == 'open';
 
-        mySocket.on('statusChange', function(data){
 
-            $scope.status  =  data.status
+            mySocket.on('statusChange', function(data){
+
+            // Set Animation
+            if($scope.status == 'open'){
+                $scope.doorState = false
+            } else if ($scope.status == 'closed'){
+                $scope.doorState = true
+            }
+
+            // Update new Status
+            $scope.status  =  data.status;
+
+            fireActions.push({
+                user: currentAuth.uid,
+                email: currentAuth.email,
+                date: new Date().getTime(),
+                action : $scope.status
+            });
         });
 
 
@@ -46,13 +62,7 @@ angular.module('gDoor.main', ['ngRoute'])
         //     console.log(position.coords.latitude, position.coords.longitude);
         // });
 
-        $scope.setDoor = function(state){
-            fireActions.push({
-                user: currentAuth.uid,
-                email: currentAuth.email,
-                date: new Date().getTime(),
-                action : state
-            });
+        $scope.setDoor = function(){
 
             $http.get('api/action')
                 .then(function(data){
