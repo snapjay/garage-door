@@ -12,11 +12,14 @@ GPIO.setup(closedPin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 openState = GPIO.input(openPin)
 closedState = GPIO.input(closedPin)
 
-if openState == True:
-        print('open')
+if openState and closedState:
+        print('transition')
 
-elif closedState == True:
+elif closedState:
         print('closed')
 
+elif openState:
+        print('open')
+
 else:
-        print('transition')
+        print('fail')
