@@ -9,30 +9,28 @@ GPIO.setmode(GPIO.BOARD)
 GPIO.setup(openPin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(closedPin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
-
-
 openState = ''
 
 while True:
-        _openState = GPIO.input(openPin)
-        _closedState = GPIO.input(closedPin)
-		
-	print ('OPEN:' + str(_openState) + ' CLOSED: ' + str(_closedState))
+    openState = GPIO.input(openPin)
+    closedState = GPIO.input(closedPin)
 
+    print ('OPEN:' + str(_openState) + ' CLOSED: ' + str(_closedState))
 
-    if openState == True  and closedState == True:
-            newState = 'open'
+    if openState and closedState:
+        newState = 'transition'
 
-    elif closedState == True:
-            newState = 'closed'
+    elif closedState:
+        newState = 'closed'
+
+    elif openState:
+        newState = 'open'
 
     else:
-            newState = 'transition'
+        newState = 'error'
 
     if currentState != newState:
-            currentState = inputState
-            print(newState + ' @' + str(time.time()))
+        currentState = newState
+        print(newState + ' @ ' + str(time.time()))
 
-                
     time.sleep(0.5)
-                
