@@ -20,16 +20,19 @@ while True:
 	print ('OPEN:' + str(_openState) + ' CLOSED: ' + str(_closedState))
 
 
+    if openState == True  and closedState == True:
+            newState = 'open'
 
+    elif closedState == True:
+            newState = 'closed'
 
-#        if currentState != inputState:
-#                currentState = inputState
-        
-#                if inputState == False:
-                        
-#                        print('Door Open = ' + str(time.time()))
-#                else:
-#                        print('Door Closed = ' + str(time.time()))
+    else:
+            newState = 'transition'
+
+    if currentState != newState:
+            currentState = inputState
+            print(newState + ' @' + str(time.time()))
+
                 
-        time.sleep(0.5)
+    time.sleep(0.5)
                 
