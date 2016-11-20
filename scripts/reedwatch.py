@@ -9,7 +9,7 @@ GPIO.setmode(GPIO.BOARD)
 GPIO.setup(openPin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(closedPin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
-openState = ''
+currentState = ''
 
 while True:
     openState = GPIO.input(openPin)
