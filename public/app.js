@@ -3,6 +3,7 @@
 angular.module('gDoor', [
     'snap',
     'firebase',
+    'btford.socket-io',
     'ngRoute',
     'ngStorage',
     'gDoor.main',
@@ -46,5 +47,7 @@ angular.module('gDoor', [
     });
 
     }
-]);
-
+]).
+factory('mySocket', function (socketFactory) {
+    return socketFactory();
+})

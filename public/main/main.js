@@ -5,11 +5,11 @@ angular.module('gDoor.main', ['ngRoute'])
             templateUrl: 'main/main.html',
             controller: 'mainCtrl',
             resolve: {
-                isOpen: ['$http', function($http){
+                initStatus: ['$http', function($http){
 
                     return $http.get('api/getStatus')
                                 .then(function(data){
-                                    return data.data.isOpen;
+                                    return data.data.status;
                                 })
                 }],
 
@@ -21,32 +21,30 @@ angular.module('gDoor.main', ['ngRoute'])
         });
     }])
 
-    .controller('mainCtrl', ['$scope', '$http', 'isOpen', 'currentAuth', function($scope, $http, isOpen, currentAuth) {
+    .controller('mainCtrl', ['$scope', '$http', 'initStatus', 'currentAuth', 'mySocket',
+        function($scope, $http, initStatus, currentAuth, mySocket) {
         var fireActions = firebase.database().ref('actions');
-        $scope.isOpen = isOpen;
-        $scope.detectedStatus = isOpen;
 
-//    elDoor.one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function(e) {
-//            if (state == 'open') {
-//                elButtonClose.attr('disabled',false);
-//            } else {
-//                elButtonOpen.attr('disabled',false);
-//            }
-//        });
+     //   $scope.status = initStatus;
+        $scope.status = initStatus;
 
-        fireActions.limitToLast(1).on('child_added', function(data) {
+        mySocket.on('statusChange', function(data){
 
-            if (data.val().user != currentAuth.uid) {  // nevermind; I did it!
-                $scope.detected = data.val();
-                $scope.detectedStatus = data.val().action;
-                $scope.isOpen = data.val().action;
-            }
-
+            $scope.status  =  data.status
         });
 
-        navigator.geolocation.getCurrentPosition(function(position) {
-            console.log(position.coords.latitude, position.coords.longitude);
-        });
+
+        // fireActions.limitToLast(1).on('child_added', function(data) {
+        //     if (data.val().user != currentAuth.uid) {  // nevermind; I did it!
+        //         $scope.detected = data.val();
+        //         $scope.detectedStatus = data.val().action;
+        //         $scope.isOpen = data.val().action;
+        //     }
+        // });
+
+        // navigator.geolocation.getCurrentPosition(function(position) {
+        //     console.log(position.coords.latitude, position.coords.longitude);
+        // });
 
         $scope.setDoor = function(state){
             fireActions.push({
@@ -56,7 +54,6 @@ angular.module('gDoor.main', ['ngRoute'])
                 action : state
             });
 
-            $scope.isOpen = !$scope.isOpen;
             $http.get('api/action')
                 .then(function(data){
                     console.log (data.data.result);

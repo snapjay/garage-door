@@ -9,7 +9,8 @@
     "angular": "~1.5.0",
     "angular-route": "^1.5.8",
     "angular-snap": "^1.8.5",
-    "ngstorage": "^0.3.11"
+    "ngstorage": "^0.3.11",
+    "angular-socket-io": "^0.7.0"
   },
   "resolutions": {
     "angular": "1.5.8"

@@ -8,13 +8,12 @@ routes.get('/getStatus', function(req, res)  {
 
         //https://dzone.com/articles/execute-unix-command-nodejs/
         var child = exec(script, function (error, stdout, stderr) {
-            var status = (stdout.trim() == 'open');
 
             res.setHeader('Content-Type', 'application/json');
             res.send(JSON.stringify(
                 {
                     error: error,
-                    isOpen: status
+                    status: stdout.trim()
                 }));
         });
 
