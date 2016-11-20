@@ -2,8 +2,8 @@
 import time
 import RPi.GPIO as GPIO
 
-openPin = 12
-closedPin = 11
+openPin = 11
+closedPin = 12
 
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(openPin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
