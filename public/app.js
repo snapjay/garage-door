@@ -8,7 +8,8 @@ angular.module('gDoor', [
     'ngStorage',
     'gDoor.main',
     'gDoor.login',
-    'gDoor.logs'
+    'gDoor.logs',
+    'gDoor.socket'
 ])
 
 
@@ -56,5 +57,11 @@ angular.module('gDoor', [
     };
 }).
 factory('mySocket', function (socketFactory) {
+
     return socketFactory();
+    // var myIoSocket = io.connect('http://192.168.3.146:3000');
+    //
+    // return socketFactory({
+    //     ioSocket: myIoSocket
+    // });
 })

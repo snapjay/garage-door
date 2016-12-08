@@ -3,7 +3,7 @@ const app = express();
 const port = 3000;
 
 const http = require('http');
-const server  = require('http').Server(app);;
+const server  = require('http').Server(app);
 const api = require('./server/api');
 const exec = require('child_process').exec;
 const firebase = require('firebase');
@@ -25,7 +25,11 @@ app.use('/', express.static(path.join(__dirname, 'public')));
 app.use('/api', api);
 
 io.on('connection', function(socket){
-    console.log('a user connected');
+    console.log(socket.handshake.headers['user-agent']);
+
+    socket.on('dog', function(msg){
+        io.emit('dog', msg);
+    });
 });
 
 server.listen(port, function () {
@@ -44,8 +48,6 @@ function checkStatus(){
     var child = exec(script, function (error, stdout, stderr) {
 
         var status = (stdout.trim());
-      //  console.log (status)
-      //  io.emit('checkStatus', { status: status });
 
         if (oldStatus != status) {
 
