@@ -20,4 +20,15 @@ angular.module('gDoor.socket', ['ngRoute'])
             console.log('Received \'dog\':' + data);
         });
 
+        $scope.sendStatusSim = function(msg) {
+            console.log('emit "statusSim":' + msg);
+            mySocket.emit('statusSim', msg)
+        };
+
+        mySocket.on('statusSim', function(data){
+            $scope.statusSimRec = data;
+            console.log('Received \'statusSim\':' + data);
+        });
+
+
     }]);

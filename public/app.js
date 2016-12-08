@@ -64,4 +64,4 @@ factory('mySocket', function (socketFactory) {
     // return socketFactory({
     //     ioSocket: myIoSocket
     // });
-})
+});

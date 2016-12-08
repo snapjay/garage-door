@@ -30,6 +30,13 @@ io.on('connection', function(socket){
     socket.on('dog', function(msg){
         io.emit('dog', msg);
     });
+
+    socket.on('statusSim', function(status){
+        console.log('statusSim' + status);
+        io.emit('statusSim', {
+            status:status
+        });
+    });
 });
 
 server.listen(port, function () {

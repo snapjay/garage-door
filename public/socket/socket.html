@@ -11,6 +11,19 @@
                 <input type="text"  ng-model="name" /> <button ng-click="sendMessage(name)">Send</button>
                 </form>
                 <div>dog: {{ dog }}</div>
+
+                <hr>
+                status simulator
+
+
+                <select name="" id="" ng-model="statusSim">
+                    <option value="open">Open</option>
+                    <option value="closed">Closed</option>
+                    <option value="transition">Transition</option>
+                </select>
+
+                <button ng-click="sendStatusSim(statusSim)">Send</button>
+                <pre>{{ statusSimRec | json}}</pre>
             </div>
         </div>
     </div>
