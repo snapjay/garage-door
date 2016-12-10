@@ -5,20 +5,21 @@ const port = 3000;
 const http = require('http');
 const server  = require('http').Server(app);
 const api = require('./server/api');
+//const alerts = require('./server/alerts');
 const exec = require('child_process').exec;
-const firebase = require('firebase');
+//const firebase = require('firebase');
 
 const path = require('path');
 
 var io = require('socket.io')(server);
 
-firebase.initializeApp({
-    databaseURL: "https://garage-door-9135e.firebaseio.com",
-    serviceAccount: "firebaseCredentials.json"
-});
-
-var db = firebase.database();
-var ref = db.ref("actions");
+// firebase.initializeApp({
+//     databaseURL: "https://garage-door-9135e.firebaseio.com",
+//     serviceAccount: "firebaseCredentials.json"
+// });
+//
+// var db = firebase.database();
+// var ref = db.ref("actions");
 
 app.use('/bower_components', express.static(path.join(__dirname, 'bower_components')));
 app.use('/', express.static(path.join(__dirname, 'public')));
@@ -27,28 +28,36 @@ app.use('/api', api);
 io.on('connection', function(socket){
     console.log(socket.handshake.headers['user-agent']);
 
-    socket.on('dog', function(msg){
+    socket.on('statusChange', function(payload){
+        console.log('statusChange')
+        if (payload.status != 'closed')  alerts.watchOpen();
+        if (payload.status == 'closed')  alerts.stopWatchOpen();
+    });
+
+
+   socket.on('dog', function(msg){
+       console.log('dog ' + msg)
         io.emit('dog', msg);
     });
 
-    socket.on('statusSim', function(status){
+   socket.on('statusSim', function(status){
         console.log('statusSim' + status);
         io.emit('statusSim', {
             status:status
         });
-    });
+   });
+
 });
+
 
 server.listen(port, function () {
     console.log('Garage Door listening on port ' + port + '!');
 });
 
-
-
-// Constant loop checking for switch status changes
 var oldStatus = null;
+
 function checkStatus(){
-   // var script= ("python " + __dirname + "/scripts/test.py");
+//  var script= ("python " + __dirname + "/../../scripts/test.py");
     var script= ("python " + __dirname + "/scripts/reed.py");
 
     //https://dzone.com/articles/execute-unix-command-nodejs/
@@ -61,6 +70,9 @@ function checkStatus(){
             io.emit('statusChange', {
                 status:status
             });
+
+            if (status != 'closed') watchOpen();
+            if (status == 'closed') stopWatchOpen();
             // ref.push({
             //     action: status,
             //     user: "serverDetected",
@@ -76,3 +88,28 @@ function checkStatus(){
 
 }
 checkStatus();
+
+var timer = null;
+
+var watchOpen = function (){
+    if (timer != null) return;
+
+    console.log('startWatch!');
+    timer = setTimeout(function () {
+        console.log('Alert: DOOR STILL OPEN!');
+
+        io.emit('alert', {
+            status:'DOOR_OPEN'
+        });
+
+    }, (15*60*1000))
+
+};
+
+var stopWatchOpen = function (){
+
+    clearTimeout(timer);
+    timer = null;
+    console.log('stopWatch!');
+
+};
