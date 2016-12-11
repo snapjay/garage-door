@@ -29,9 +29,7 @@ io.on('connection', function(socket){
     console.log(socket.handshake.headers['user-agent']);
 
     socket.on('statusChange', function(payload){
-        console.log('statusChange')
-        if (payload.status != 'closed')  alerts.watchOpen();
-        if (payload.status == 'closed')  alerts.stopWatchOpen();
+        console.log('statusChange: ' + payload.status)
     });
 
 
@@ -57,7 +55,7 @@ server.listen(port, function () {
 var oldStatus = null;
 
 function checkStatus(){
-//  var script= ("python " + __dirname + "/../../scripts/test.py");
+//  var script= ("python " + __dirname + "/scripts/test.py");
     var script= ("python " + __dirname + "/scripts/reed.py");
 
     //https://dzone.com/articles/execute-unix-command-nodejs/
@@ -73,6 +71,9 @@ function checkStatus(){
 
             if (status != 'closed') watchOpen();
             if (status == 'closed') stopWatchOpen();
+
+            if (status == 'transition')  watchTransition();
+            if (status != 'transition')  stopWatchTransition();
             // ref.push({
             //     action: status,
             //     user: "serverDetected",
@@ -89,13 +90,14 @@ function checkStatus(){
 }
 checkStatus();
 
-var timer = null;
+var openTimer = null;
+var transitionTimer = null;
 
 var watchOpen = function (){
-    if (timer != null) return;
+    if (openTimer != null) return;
 
-    console.log('startWatch!');
-    timer = setTimeout(function () {
+    console.log('startOpenWatch!');
+    openTimer = setTimeout(function () {
         console.log('Alert: DOOR STILL OPEN!');
 
         io.emit('alert', {
@@ -108,8 +110,31 @@ var watchOpen = function (){
 
 var stopWatchOpen = function (){
 
-    clearTimeout(timer);
-    timer = null;
-    console.log('stopWatch!');
+    clearTimeout(openTimer);
+    openTimer = null;
+    console.log('stopOpenWatch!');
+
+};
+
+var watchTransition = function (){
+    if (transitionTimer != null) return;
+
+    console.log('startTransitionWatch!');
+    transitionTimer = setTimeout(function () {
+        console.log('Alert: DOOR IN TRANSITION FOR TOO LONG!');
+
+        io.emit('alert', {
+            status:'DOOR_TRANSITION'
+        });
+
+    }, (30*1000))
+
+};
+
+var stopWatchTransition = function (){
+
+    clearTimeout(transitionTimer);
+    transitionTimer = null;
+    console.log('stopTransitionWatch!');
 
 };

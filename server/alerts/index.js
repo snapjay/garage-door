@@ -42,13 +42,13 @@
 // }
 // checkStatus();
 //
-// var timer = null;
+// var openTimer = null;
 //
 // var watchOpen = function (){
-//     if (timer != null) return;
+//     if (openTimer != null) return;
 //
 //     console.log('startWatch!');
-//     timer = setTimeout(function () {
+//     openTimer = setTimeout(function () {
 //         console.log('Alert: DOOR STILL OPEN!');
 //
 //         io.emit('alert', {
@@ -61,8 +61,8 @@
 //
 // var stopWatchOpen = function (){
 //
-//     clearTimeout(timer);
-//     timer = null;
+//     clearTimeout(openTimer);
+//     openTimer = null;
 //     console.log('stopWatch!');
 //
 // };
