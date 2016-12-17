@@ -11,6 +11,13 @@ const exec = require('child_process').exec;
 
 const path = require('path');
 
+var accountSid = 'AC174b04cc94a540558e8a3e4e920918ee';
+var accountSid = 'AC8f4bcf038392b471fbeaba2f9377efb0'; // TEST
+var authToken = '0acb766e9142d717eb35ad7ac523ae06';
+
+//require the Twilio module and create a REST client
+var client = require('twilio')(accountSid, authToken);
+
 var io = require('socket.io')(server);
 
 // firebase.initializeApp({
@@ -104,7 +111,16 @@ var watchOpen = function (){
             status:'DOOR_OPEN'
         });
 
-    }, (15*60*1000))
+        client.calls.create({
+            to: "+16473301029",
+            from: "+16473301029",
+            url:"https://handler.twilio.com/twiml/EH690893e8188ef78e7651ea6829619fe8"
+
+        }, function(err, call) {
+            console.log(call.sid);
+        });
+
+    }, (1*60*1000))
 
 };
 
