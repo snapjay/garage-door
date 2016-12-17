@@ -11,10 +11,11 @@ const exec = require('child_process').exec;
 
 const path = require('path');
 
-var accountSid = 'AC174b04cc94a540558e8a3e4e920918ee';  var authToken = '0acb766e9142d717eb35ad7ac523ae06';
+const doorOpenWarning = 15 * 60;
+const doorTransitionWarning = 30;
 
 //require the Twilio module and create a REST client
-var client = require('twilio')(accountSid, authToken);
+// var client = require('twilio')(accountSid, authToken);
 
 var io = require('socket.io')(server);
 
@@ -100,27 +101,27 @@ var transitionTimer = null;
 
 var watchOpen = function (){
     if (openTimer != null) return;
-
     console.log('startOpenWatch!');
     openTimer = setTimeout(function () {
         console.log('Alert: DOOR STILL OPEN!');
 
         io.emit('alert', {
-            status:'DOOR_OPEN'
+            status:'DOOR_OPEN',
+            time : doorOpenWarning
         });
 
-        client.calls.create({
-            to: "+16473301029",
-            from: "+16473301029",
-            url:"https://handler.twilio.com/twiml/EH690893e8188ef78e7651ea6829619fe8"
+        // client.calls.create({
+        //     to: "+16473301029",
+        //     from: "+16473301029",
+        //     url:"https://handler.twilio.com/twiml/EH690893e8188ef78e7651ea6829619fe8"
+        //
+        // }, function(err, call) {
+        //     console.log(err);
+        //     console.log(call);
+        //     console.log(call.sid);
+        // });
 
-        }, function(err, call) {
-            console.log(err);
-            console.log(call);
-            console.log(call.sid);
-        });
-
-    }, (1*60*1000))
+    }, (doorOpenWarning * 1000))
 
 };
 
@@ -140,10 +141,11 @@ var watchTransition = function (){
         console.log('Alert: DOOR IN TRANSITION FOR TOO LONG!');
 
         io.emit('alert', {
-            status:'DOOR_TRANSITION'
+            status:'DOOR_TRANSITION',
+            time : doorTransitionWarning
         });
 
-    }, (30*1000))
+    }, (doorTransitionWarning*1000))
 
 };
 
