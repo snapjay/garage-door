@@ -69,8 +69,8 @@ function checkStatus(){
                 status:status
             });
 
-            if (status != 'closed') watchOpen();
-            if (status == 'closed') stopWatchOpen();
+            if (status == 'open') watchOpen();
+            if (status != 'open') stopWatchOpen();
 
             if (status == 'transition')  watchTransition();
             if (status != 'transition')  stopWatchTransition();
