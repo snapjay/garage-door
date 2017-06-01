@@ -16,8 +16,11 @@ Get the latest code and install
 * npm start
 
 
-Run services:
+Install as service:
 * npm install -g forever
+* npm install -g forever-service
+* sudo forever-service install garage --script index.js --start
+
 
 * sudo service garage start
 * sudo service garage stop

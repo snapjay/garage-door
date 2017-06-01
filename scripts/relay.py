@@ -9,7 +9,7 @@ GPIO.setmode(GPIO.BOARD)
 GPIO.setup(RELAYPIN, GPIO.OUT)
 GPIO.output(RELAYPIN, GPIO.LOW)
 
-time.sleep(15)
+time.sleep(0.5)
 
 GPIO.output(RELAYPIN, GPIO.HIGH)
 
