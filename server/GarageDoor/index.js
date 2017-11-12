@@ -1,4 +1,4 @@
-const scriptPath = 'py ' + __dirname + '/scripts/';
+const scriptPath = 'python ' + __dirname + '/scripts/';
 const exec = require('child_process').exec;
 const events = require('events');
 

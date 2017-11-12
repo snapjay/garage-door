@@ -16,7 +16,7 @@ routes.get('/getStatus', function (req, res) {
 
 routes.get('/action', function (req, res) {
 
-    GarageDoor.getStatus((result, error) => {
+    GarageDoor.action((result, error) => {
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.stringify(
             {
