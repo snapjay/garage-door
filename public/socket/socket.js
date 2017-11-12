@@ -10,18 +10,9 @@ angular.module('gDoor.socket', ['ngRoute'])
 
     .controller('socketCtrl', ['$rootScope', '$scope', 'mySocket',  function($rootScope, $scope, mySocket) {
 
-        $scope.sendMessage = function(msg) {
-            console.log('emit "dog":' + msg);
-             mySocket.emit('dog', msg)
-        };
-
-        mySocket.on('dog', function(data){
-            $scope.dog = data;
-            console.log('Received \'dog\':' + data);
-        });
         mySocket.on('alert', function(data){
             $scope.alert = data;
-            console.log('Received \'alert\':' + data);
+            console.log('Received \'alert\':',  data);
         });
 
         $scope.sendStatusSim = function(msg) {
@@ -31,7 +22,7 @@ angular.module('gDoor.socket', ['ngRoute'])
 
         mySocket.on('statusSim', function(data){
             $scope.statusSimRec = data;
-            console.log('Received \'statusSim\':' + data);
+            console.log('Received \'statusSim\':', data);
         });
 
 

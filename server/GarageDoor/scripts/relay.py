@@ -3,6 +3,7 @@ import time
 import RPi.GPIO as GPIO
 
 
+print("done")
 RELAYPIN = 7
 
 GPIO.setmode(GPIO.BOARD)
@@ -12,7 +13,6 @@ GPIO.output(RELAYPIN, GPIO.LOW)
 time.sleep(0.5)
 
 GPIO.output(RELAYPIN, GPIO.HIGH)
-
 
 GPIO.cleanup()
 

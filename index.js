@@ -1,158 +1,28 @@
-const express = require('express');
-const app = express();
-const port = 3000;
+const server = require('./server/index');
+const GarageDoor = require('./server/GarageDoor/index');
+const SocketIO = require('./server/Respones/SocketIO');
 
-const http = require('http');
-const server  = require('http').Server(app);
-const api = require('./server/api');
-//const alerts = require('./server/alerts');
-const exec = require('child_process').exec;
-//const firebase = require('firebase');
+const Alerts = require('./server/GarageDoor/alerts');
+require('./server/GarageDoor/alerts/OpenTooLong');
+require('./server/GarageDoor/alerts/InTransition');
+require('./server/GarageDoor/alerts/NightWatch');
+require('./server/GarageDoor/alerts/HomeAlone');
 
-const path = require('path');
+GarageDoor.startWatch();
 
-const doorOpenWarning = 15 * 60;
-const doorTransitionWarning = 30;
-
-//require the Twilio module and create a REST client
-// var client = require('twilio')(accountSid, authToken);
-
-var io = require('socket.io')(server);
-
-// firebase.initializeApp({
-//     databaseURL: "https://garage-door-9135e.firebaseio.com",
-//     serviceAccount: "firebaseCredentials.json"
-// });
-//
-// var db = firebase.database();
-// var ref = db.ref("actions");
-
-app.use('/bower_components', express.static(path.join(__dirname, 'bower_components')));
-app.use('/', express.static(path.join(__dirname, 'public')));
-app.use('/api', api);
-
-io.on('connection', function(socket){
-    console.log(socket.handshake.headers['user-agent']);
-
-    socket.on('statusChange', function(payload){
-        console.log('statusChange: ' + payload.status)
-    });
-
-
-   socket.on('dog', function(msg){
-       console.log('dog ' + msg)
-        io.emit('dog', msg);
-    });
-
-   socket.on('statusSim', function(status){
-        console.log('statusSim' + status);
-        io.emit('statusSim', {
-            status:status
-        });
-   });
-
+//Subscribe for FirstEvent
+GarageDoor.events.on('STATUS_CHANGE',  (newStatus) => {
+    console.log(`Changed to ${newStatus}`);
+    SocketIO.sendStatus(newStatus);
 });
 
-
-server.listen(port, function () {
-    console.log('Garage Door listening on port ' + port + '!');
+// NIGHT_WATCH HOME_ALONE DOOR_TRANSITION DOOR_OPEN
+Alerts.events.on('ALERT',  (code) => {
+    console.log(`ALERT: ${code}`);
+    SocketIO.sendAlert(code);
 });
-
-var oldStatus = null;
-
-function checkStatus(){
-//  var script= ("python " + __dirname + "/scripts/test.py");
-    var script= ("python " + __dirname + "/scripts/reed.py");
-
-    //https://dzone.com/articles/execute-unix-command-nodejs/
-    var child = exec(script, function (error, stdout, stderr) {
-
-        var status = (stdout.trim());
-
-        if (oldStatus != status) {
-
-            io.emit('statusChange', {
-                status:status
-            });
-
-            if (status == 'open') watchOpen();
-            if (status != 'open') stopWatchOpen();
-
-            if (status == 'transition')  watchTransition();
-            if (status != 'transition')  stopWatchTransition();
-            // ref.push({
-            //     action: status,
-            //     user: "serverDetected",
-            //     date: new Date().getTime()
-            // });
-
-            console.log('Status Change to: ' + status);
-            oldStatus = status;
-        }
-    });
-
-    setTimeout(checkStatus, 200)
-
-}
-checkStatus();
-
-var openTimer = null;
-var transitionTimer = null;
-
-var watchOpen = function (){
-    if (openTimer != null) return;
-    console.log('startOpenWatch!');
-    openTimer = setTimeout(function () {
-        console.log('Alert: DOOR STILL OPEN!');
-
-        io.emit('alert', {
-            status:'DOOR_OPEN',
-            time : doorOpenWarning
-        });
-
-        // client.calls.create({
-        //     to: "+16473301029",
-        //     from: "+16473301029",
-        //     url:"https://handler.twilio.com/twiml/EH690893e8188ef78e7651ea6829619fe8"
-        //
-        // }, function(err, call) {
-        //     console.log(err);
-        //     console.log(call);
-        //     console.log(call.sid);
-        // });
-
-    }, (doorOpenWarning * 1000))
-
-};
-
-var stopWatchOpen = function (){
-
-    clearTimeout(openTimer);
-    openTimer = null;
-    console.log('stopOpenWatch!');
-
-};
-
-var watchTransition = function (){
-    if (transitionTimer != null) return;
-
-    console.log('startTransitionWatch!');
-    transitionTimer = setTimeout(function () {
-        console.log('Alert: DOOR IN TRANSITION FOR TOO LONG!');
-
-        io.emit('alert', {
-            status:'DOOR_TRANSITION',
-            time : doorTransitionWarning
-        });
-
-    }, (doorTransitionWarning*1000))
-
-};
-
-var stopWatchTransition = function (){
-
-    clearTimeout(transitionTimer);
-    transitionTimer = null;
-    console.log('stopTransitionWatch!');
-
-};
+Alerts.events.on('ALERT',  (code) => {
+    if (code === 'NIGHT_WATCH'){
+        GarageDoor.action(()=>{})
+    }
+});

@@ -5,12 +5,17 @@
             <button id="btnOpen" class="btn btn-primary btn-lg activate"
                      ng-click="setDoor()">Activate</button>
 
-
-
             <div style="margin: 28px 0">
                 Status: {{ status | titlecase }}
             </div>
 
+            <hr>
+            <div ng-show="alerts">
+                <h3>Alerts</h3>
+                <ul class="alert">
+                    <li ng-repeat="alert in alerts">{{ alert }}</li>
+                </ul>
+            </div>
         </div>
         <div class="col-sm-6">
             <div class="garage">

@@ -1,38 +1,29 @@
 const routes = require('express').Router();
-const exec = require('child_process').exec;
+const GarageDoor = require('../GarageDoor/index');
 
-var scriptPath = "python " + __dirname + "/../../scripts/";
+routes.get('/getStatus', function (req, res) {
 
-routes.get('/getStatus', function(req, res)  {
-
-        var script= (scriptPath + "reed.py");
-
-        //https://dzone.com/articles/execute-unix-command-nodejs/
-        var child = exec(script, function (error, stdout, stderr) {
- 	
-
-            res.setHeader('Content-Type', 'application/json');
-            res.send(JSON.stringify(
-                {
-                    error: error,
-                    status: stdout.trim()
-                }));
-        });
-
-});
-
-routes.get('/action', function(req, res)  {
-    var script= (scriptPath + "relay.py");
-    var child = exec(script, function (error, stdout, stderr) {
-
-        var status = (stdout.trim() == 'done');
-
+    GarageDoor.getStatus((result, error) => {
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.stringify(
             {
                 error: error,
-                result: status
+                status: result
             }));
+
+    });
+});
+
+routes.get('/action', function (req, res) {
+
+    GarageDoor.getStatus((result, error) => {
+        res.setHeader('Content-Type', 'application/json');
+        res.send(JSON.stringify(
+            {
+                error: error,
+                result: result
+            }));
+
     });
 });
 
