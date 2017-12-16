@@ -18,13 +18,9 @@
     "url": "https://github.com/snapjay/garage-door/issues"
   },
   "dependencies": {
-    "angular-route": "^1.5.8",
     "axios": "^0.17.0",
     "body-parser": "^1.18.2",
-    "bootstrap": "^3.3.7",
-    "bower": "^1.8.0",
     "express": "^4.14.0",
-    "firebase": "^3.3.2",
     "node-schedule": "^1.2.5",
     "socket.io": "^1.5.1",
     "twilio": "^2.11.1"
