@@ -14,7 +14,6 @@ const api = require('./api')
 
 app.use('/api', api)
 app.use('/', express.static(path.join(__dirname, '../dist')))
-app.use('/bower_components', express.static(path.join(__dirname, '../bower_components')))
 
 server.listen(settings.port, function () {
   console.log('Garage Door listening on port ' + settings.port + '!')

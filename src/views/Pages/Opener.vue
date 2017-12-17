@@ -1,19 +1,27 @@
 <template lang="pug">
-    div
-        p
-            md-button.md-dense.md-raised.md-primary(@click='getStatus()') Activate
-        p {{ status }}
-        h4 Alerts
-        ul
-            li(v-for='alert in alerts') {{ alert }}
+  .md-layout
+    .md-layout-item
+      p
+        md-button.md-dense.md-raised.md-primary(@click='getStatus()') Activate
+      p {{ status }}
+      h4 Alerts
+      ul
+        li(v-for='alert in alerts') {{ alertsConts[alert] }}
+
+    .md-layout-item
+      door-image(:status='status')
 
 </template>
 
 <script>
   import axios from 'axios'
+  import DoorImage from '../../components/DoorImage'
 
   export default {
     name: 'Opener',
+    components: {
+      'door-image': DoorImage
+    },
     data () {
       return {
         status: 'Unknown',

@@ -1,27 +1,28 @@
 <div class="container">
-    <div class="row">
-        <div class="col-sm-6">
-            <p>Press button to activate the garage door.</p>
-            <button id="btnOpen" class="btn btn-primary btn-lg activate"
-                     ng-click="setDoor()">Activate</button>
+  <div class="row">
+    <div class="col-sm-6">
+      <p>Press button to activate the garage door.</p>
+      <button id="btnOpen" class="btn btn-primary btn-lg activate"
+              ng-click="setDoor()">Activate
+      </button>
 
-            <div style="margin: 28px 0">
-                Status: {{ status | titlecase }}
-            </div>
+      <div style="margin: 28px 0">
+        Status: {{ status | titlecase }}
+      </div>
 
-            <hr>
-            <div ng-show="alerts">
-                <h3>Alerts</h3>
-                <ul class="alert">
-                    <li ng-repeat="alert in alerts">{{ alert }}</li>
-                </ul>
-            </div>
-        </div>
-        <div class="col-sm-6">
-            <div class="garage">
+      <hr>
+      <div ng-show="alerts">
+        <h3>Alerts</h3>
+        <ul class="alert">
+          <li ng-repeat="alert in alerts">{{ alert }}</li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="garage">
 
-                <div class="door">
-                    <svg version="1.1" id="door" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+        <div class="door">
+          <svg version="1.1" id="door" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
  viewBox="0 0 149 88" style="enable-background:new 0 0 149 88;" xml:space="preserve" ng-class="{open:doorState}">
 
     <rect class="handle" width="149" height="87.8"/>
@@ -39,9 +40,9 @@
     <rect x="70.5" y="85" class="handle" width="8.2" height="1"/>
 </svg>
 
-                </div>
+        </div>
 
-                <svg version="1.1" id="garage" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+        <svg version="1.1" id="garage" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
  viewBox="0 0 232.2 143.6" style="enable-background:new 0 0 232.2 143.6;" xml:space="preserve">
 <rect id="garage_house" x="-0.4" y="0.1" width="233" height="23"/>
 <path id="garage_outside" d="M42.5,143.6c-10.7,0-20.8,0-31.4,0c0-38.3,0.2-76.2,0.2-115c70.3,0,140.9,0,211.9,0
@@ -62,9 +63,9 @@
      M131.7,99.2h-3.5V84.5h3.5V99.2z"/>
 </svg>
 
-            </div>
-        </div>
-
+      </div>
     </div>
 
-    </div>
+  </div>
+
+</div>
