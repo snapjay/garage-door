@@ -16,6 +16,12 @@ Vue.config.productionTip = false
 Vue.use(VueMaterial)
 Vue.use(VueSocketio, 'http://192.168.3.130:3000')
 
+Vue.filter('capitalize', function (value) {
+  if (!value) return ''
+  value = value.toString()
+  return value.charAt(0).toUpperCase() + value.slice(1)
+})
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

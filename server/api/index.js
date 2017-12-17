@@ -9,7 +9,6 @@ routes.get('/getStatus', function (req, res) {
         error: error,
         status: result
       }))
-
   })
 })
 
