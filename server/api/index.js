@@ -2,8 +2,8 @@ const routes = require('express').Router()
 const GarageDoor = require('../GarageDoor/index')
 
 routes.get('/getStatus', function (req, res) {
+  res.setHeader('Content-Type', 'application/json')
   GarageDoor.getStatus((result, error) => {
-    res.setHeader('Content-Type', 'application/json')
     res.send(JSON.stringify(
       {
         error: error,
@@ -13,14 +13,14 @@ routes.get('/getStatus', function (req, res) {
 })
 
 routes.get('/action', function (req, res) {
-  GarageDoor.action((result, error) => {
-    res.setHeader('Content-Type', 'application/json')
-    res.send(JSON.stringify(
-      {
-        error: error,
-        result: result
-      }))
-  })
+  GarageDoor.action()
+  // Send Response; don't wait for script to complete
+  res.setHeader('Content-Type', 'application/json')
+  res.send(JSON.stringify(
+    {
+      error: null,
+      result: true
+    }))
 })
 
 module.exports = routes
