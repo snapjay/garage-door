@@ -36,7 +36,7 @@
     },
     methods: {
       getStatus: function () {
-        axios.get('http://192.168.3.130:3000/api/getStatus')
+        axios.get('/api/getStatus')
           .then(rsp => {
             this.status = rsp.status
           })
