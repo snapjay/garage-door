@@ -1,6 +1,5 @@
 Garage Door Install
 
-
 Get the latest of Node
 * sudo apt-get install npm
 * sudo npm cache clean -f
@@ -10,9 +9,7 @@ Get the latest of Node
 
 Get the latest code and install
 * git clone https://github.com/snapjay/garage-door.git
-* sudo npm install
-* sudo npm bower install -g
-* sudo bower install
+* sudo npm install --production
 * npm start
 
 
