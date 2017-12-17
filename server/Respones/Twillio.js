@@ -1,7 +1,6 @@
 // require the Twilio module and create a REST client
 // var client = require('twilio')(accountSid, authToken);
 
-
 // client.calls.create({
 //     to: "+16473301029",
 //     from: "+16473301029",
