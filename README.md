@@ -9,7 +9,7 @@ Get the latest of Node
 
 Get the latest code and install
 * git clone https://github.com/snapjay/garage-door.git
-* sudo npm install --production
+* sudo npm i --production
 * npm start
 
 
