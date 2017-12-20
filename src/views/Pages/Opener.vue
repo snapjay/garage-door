@@ -25,8 +25,8 @@
         md-card-content
           p 3 Phillips Hue lights
         md-card-actions
-          md-button.md-dense.md-raised.md-primary(@click='hue("on")') On
-          md-button.md-dense.md-raised.md-primary(@click='hue("off")') Off
+          md-button.md-dense.md-raised(@click='hue("on")') On
+          md-button.md-dense.md-raised(@click='hue("off")') Off
 
     .md-layout-item
       door-image(:status='status')
