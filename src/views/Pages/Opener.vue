@@ -18,6 +18,15 @@
             md-list-item(v-for='alert in alerts')
               md-icon(v-text='alertsConts[alert].icon')
               span.md-list-item-text(v-text='alertsConts[alert].title')
+    .md-layout-item
+      md-card(md-with-hover)
+        md-card-header
+          .md-title Lights
+        md-card-content
+          p 3 Phillips Hue lights
+        md-card-actions
+          md-button.md-dense.md-raised.md-primary(@click='hue("on")') On
+          md-button.md-dense.md-raised.md-primary(@click='hue("off")') Off
 
     .md-layout-item
       door-image(:status='status')
@@ -66,6 +75,12 @@
         axios.get('/api/action')
           .catch(() => {
             this.status = `Unable to connect`
+          })
+      },
+      hue: function (state) {
+        axios.get(`/api/hue?state=${state}`)
+          .catch(() => {
+            this.hue = `Unable to connect`
           })
       }
     }
