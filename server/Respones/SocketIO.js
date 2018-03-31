@@ -12,7 +12,7 @@ io.on('connection', function (socket) {
 
 SocketIO.sendAlert = (code) => {
   io.emit('alert', {
-    status: code,
+    status: code
   })
 }
 
