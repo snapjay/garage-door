@@ -1,5 +1,7 @@
 Garage Door API Install
 
+**SETUP**
+
 Get the latest of Node and Git
 * `sudo apt-get update`
 * `sudo apt-get install npm git`
@@ -22,3 +24,14 @@ Commands to interact with service garage
 * `sudo service garage stop`
 * `sudo service garage status`
 * `sudo service garage restart`
+
+
+**API**
+
+`/status`  
+Returns status of door open, closed or transition 
+
+`/action`  
+Actions the door
+
+
