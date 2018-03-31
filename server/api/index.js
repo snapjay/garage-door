@@ -4,7 +4,7 @@ let env = require('../../env')
 let Hue = require('philips-hue')
 let hue = new Hue()
 
-routes.get('/getStatus', function (req, res) {
+routes.get('/status', function (req, res) {
   res.setHeader('Content-Type', 'application/json')
   GarageDoor.getStatus((result, error) => {
     res.send(JSON.stringify(
