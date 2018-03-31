@@ -24,6 +24,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "body-parser": "^1.18.2",
+    "dotenv": "^5.0.1",
     "express": "^4.16.2",
     "node-schedule": "^1.2.5",
     "philips-hue": "^1.2.0",

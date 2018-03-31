@@ -17,6 +17,7 @@ archive
 *.ai
 node_modules
 nohup.out
-env.json
+.env
 public.angular/
 /.editorconfig
+/.env

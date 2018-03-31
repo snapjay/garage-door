@@ -10,7 +10,7 @@ Get the latest of Node and Git
 Get the latest code and install
 * `git clone https://github.com/snapjay/garage-door.git`
 * `sudo npm i --production`
-* `cp env.example.json env.json`
+* `cp .env.example .env`
 * `npm start`
 
 Install as service:

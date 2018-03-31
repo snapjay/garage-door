@@ -1,6 +1,6 @@
+require('dotenv').config()
 const path = require('path')
 const express = require('express')
-const settings = require('./settings')
 const bodyParser = require('body-parser')
 
 const app = express()
@@ -15,8 +15,8 @@ const api = require('./api')
 app.use('/api', api)
 app.use('/', express.static(path.join(__dirname, '../public')))
 
-server.listen(settings.port, function () {
-  console.log('Garage Door listening on port ' + settings.port + '!')
+server.listen(process.env.PORT, function () {
+  console.log('Garage Door listening on port ' + process.env.PORT + '!')
 })
 
 module.exports = {

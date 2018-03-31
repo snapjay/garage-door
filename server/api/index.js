@@ -1,6 +1,5 @@
 const routes = require('express').Router()
 const GarageDoor = require('../GarageDoor/index')
-let env = require('../../env')
 let Hue = require('philips-hue')
 let hue = new Hue()
 
@@ -28,8 +27,8 @@ routes.get('/action', function (req, res) {
 
 routes.get('/hue', function (req, res) {
   res.setHeader('Content-Type', 'application/json')
-  hue.bridge = env.hue.bridge
-  hue.username = env.hue.username
+  hue.bridge = process.env.HUE_BRIDGE
+  hue.username = process.env.HUE_USERNAME
   let promise = Promise
   if (req.query.state === 'on') {
     promise = Promise.all([hue.light(1).on(), hue.light(2).on(), hue.light(3).on()])

@@ -1,7 +1,8 @@
+require('dotenv').config()
 const GarageDoor = require('../index')
 const axios = require('axios')
 const Alerts = require('./index')
-const environment = require('./../../../env.json')
+const environment = require('../../../.env')
 
 let HomeAlone = {}
 
@@ -14,10 +15,10 @@ GarageDoor.events.on('STATUS_CHANGE', (newStatus) => {
 HomeAlone.checkHome = function () {
   axios({
     method: 'get',
-    url: `https://developer-api.nest.com/structures/${environment.nest.structure}/away`,
+    url: `https://developer-api.nest.com/structures/${process.env.DB_HOST.NEST_STRUCTURE}/away`,
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${environment.nest.authorization}`
+      Authorization: `Bearer ${process.env.DB_HOST.NEST_AUTHORIZATION}`
     }
   }).then(function (data) {
     if (data.data === 'away') {
