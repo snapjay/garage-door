@@ -2,8 +2,6 @@ require('dotenv').config()
 const GarageDoor = require('../index')
 const axios = require('axios')
 const Alerts = require('./index')
-const environment = require('../../../.env')
-
 let HomeAlone = {}
 
 GarageDoor.events.on('STATUS_CHANGE', (newStatus) => {
