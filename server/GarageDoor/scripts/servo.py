@@ -2,7 +2,6 @@
 import time
 import RPi.GPIO as GPIO
 
-
 servoPin = 7
 start = 8
 end = 6

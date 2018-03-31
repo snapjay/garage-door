@@ -4,29 +4,24 @@ let Hue = require('philips-hue')
 let hue = new Hue()
 
 routes.get('/status', function (req, res) {
-  res.setHeader('Content-Type', 'application/json')
   GarageDoor.getStatus((result, error) => {
-    res.send(JSON.stringify(
-      {
-        error: error,
-        status: result
-      }))
+    res.json({
+      error: error,
+      status: result
+    })
   })
 })
 
 routes.get('/action', function (req, res) {
-  GarageDoor.action()
-  // Send Response; don't wait for script to complete
-  res.setHeader('Content-Type', 'application/json')
-  res.send(JSON.stringify(
-    {
-      error: null,
-      result: true
-    }))
+  GarageDoor.action((result, error) => {
+    res.json({
+      error: error,
+      status: (result === 'done')
+    })
+  })
 })
 
 routes.get('/hue', function (req, res) {
-  res.setHeader('Content-Type', 'application/json')
   hue.bridge = process.env.HUE_BRIDGE
   hue.username = process.env.HUE_USERNAME
   let promise = Promise
@@ -37,8 +32,8 @@ routes.get('/hue', function (req, res) {
   }
 
   promise.then(function (lights) {
-    res.send(JSON.stringify(
-      lights))
+    res.json(
+      lights)
   })
 })
 
