@@ -13,10 +13,10 @@ GarageDoor.events.on('STATUS_CHANGE', (newStatus) => {
 HomeAlone.checkHome = function () {
   axios({
     method: 'get',
-    url: `https://developer-api.nest.com/structures/${process.env.DB_HOST.NEST_STRUCTURE}/away`,
+    url: `https://developer-api.nest.com/structures/${process.env.NEST_STRUCTURE}/away`,
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${process.env.DB_HOST.NEST_AUTHORIZATION}`
+      Authorization: `Bearer ${process.env.NEST_AUTHORIZATION}`
     }
   }).then(function (data) {
     if (data.data === 'away') {
