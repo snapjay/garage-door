@@ -1,6 +1,6 @@
 Garage Door API Install
 
-**SETUP**
+## SETUP
 
 Get the latest of Node and Git
 * `sudo apt-get update`
@@ -29,7 +29,7 @@ Commands to interact with service garage
 * `sudo service garage restart`
 
 
-**API**
+## API
 
 `/status`  
 Returns status of door open, closed or transition 
@@ -37,4 +37,16 @@ Returns status of door open, closed or transition
 `/action`  
 Actions the door
 
+`/hue`  
+`state=on`
+Turn on or off hue lights
 
+## SOCKET
+
+* `STATUS_CHANGE` 
+
+### Alerts
+* `HOME_ALONE` 
+* `DOOR_TRANSITION` 
+* `NIGHT_WATCH` 
+* `DOOR_OPEN` 
