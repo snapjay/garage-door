@@ -19,6 +19,9 @@ Install as service:
 * `npm install -g forever forever-service`
 * `sudo forever-service install garage --script index.js --start`
 
+Set TimeZone
+* `cp /usr/share/zoneinfo/America/Toronto /etc/localtime`
+
 Commands to interact with service garage
 * `sudo service garage start`
 * `sudo service garage stop`
