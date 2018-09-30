@@ -2,9 +2,18 @@ require('dotenv').config()
 const path = require('path')
 const express = require('express')
 const bodyParser = require('body-parser')
+const fs = require('fs')
+
+
+const options = {
+ key: fs.readFileSync('../../client-key.pem').toString(),
+ cert: fs.readFileSync('../../client-cert.pem').toString()
+}
 
 const app = express()
-const server = require('http').Server(app)
+const http = require('http')
+const server = http.Server(app)
+const https = require('https')
 const io = require('socket.io')(server)
 
 app.use(bodyParser.json()) // support json encoded bodies
@@ -19,6 +28,10 @@ const api = require('./api')
 
 app.use('/api', api)
 app.use('/', express.static(path.join(__dirname, '../public')))
+
+
+const httpServer = https.createServer(options, app)
+httpServer.listen(8443)
 
 server.listen(process.env.PORT, function () {
   console.log('Garage Door listening on port ' + process.env.PORT + '!')
