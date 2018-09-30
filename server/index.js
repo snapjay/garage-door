@@ -4,10 +4,9 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const fs = require('fs')
 
-
 const options = {
- key: fs.readFileSync('../../client-key.pem').toString(),
- cert: fs.readFileSync('../../client-cert.pem').toString()
+  key: fs.readFileSync('./cert/client-key.pem').toString(),
+  cert: fs.readFileSync('./cert/client-cert.pem').toString()
 }
 
 const app = express()
@@ -28,7 +27,6 @@ const api = require('./api')
 
 app.use('/api', api)
 app.use('/', express.static(path.join(__dirname, '../public')))
-
 
 const httpServer = https.createServer(options, app)
 httpServer.listen(8443)
