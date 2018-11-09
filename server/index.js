@@ -2,17 +2,10 @@ require('dotenv').config()
 const path = require('path')
 const express = require('express')
 const bodyParser = require('body-parser')
-const fs = require('fs')
-
-const options = {
-  key: fs.readFileSync('./cert/client-key.pem').toString(),
-  cert: fs.readFileSync('./cert/client-cert.pem').toString()
-}
 
 const app = express()
 const http = require('http')
 const server = http.Server(app)
-const https = require('https')
 const io = require('socket.io')(server)
 
 app.use(bodyParser.json()) // support json encoded bodies
@@ -28,12 +21,18 @@ const api = require('./api')
 app.use('/api', api)
 app.use('/', express.static(path.join(__dirname, '../public')))
 
-const httpServer = https.createServer(options, app)
-httpServer.listen(8443)
-
-server.listen(process.env.PORT, function () {
-  console.log('Garage Door listening on port ' + process.env.PORT + '!')
-})
+require('greenlock-express').create({
+  version: 'draft-11',
+  server: 'https://acme-v02.api.letsencrypt.org/directory',
+  configDir: path.join(__dirname, '../cert'),
+  email: 'dan@snapjay.com',
+  approvedDomains: ['localhost', 'api.door.snapjay'],
+  agreeTos: true,
+  app: app,
+  communityMember: true,
+  telemetry: true,
+  debug: true
+}).listen(8080, 443)
 
 module.exports = {
   server: server,
