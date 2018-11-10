@@ -26,13 +26,13 @@ require('greenlock-express').create({
   server: 'https://acme-v02.api.letsencrypt.org/directory',
   configDir: path.join(__dirname, '../cert'),
   email: 'dan@snapjay.com',
-  approvedDomains: ['localhost', 'api.door.snapjay'],
+  approvedDomains: ['api.door.snapjay.com'],
   agreeTos: true,
   app: app,
   communityMember: true,
   telemetry: true,
   debug: true
-}).listen(80, 8443)
+}).listen(8080, 8448)
 
 module.exports = {
   server: server,
