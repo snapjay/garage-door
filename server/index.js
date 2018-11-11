@@ -2,37 +2,32 @@
 
 const path = require('path')
 
+const express = require('express')
+const app = express()
+app.use('/', function (req, res) {
+  res.setHeader('Content-Type', 'text/html; charset=utf-8')
+  res.end('Hello, secure World!\n\n💚 🔒.js')
+})
+
 require('greenlock-express').create({
   version: 'draft-11',
-  // Note: If at first you don't succeed, switch to staging to debug
-  // https://acme-staging-v02.api.letsencrypt.org/directory
-  // https://acme-staging-v02.api.letsencrypt.org/directory
-  server: 'https://acme-staging-v02.api.letsencrypt.org/directory',
-  // Where the certs will be saved, MUST have write access
+  server: 'https://acme-v02.api.letsencrypt.org/directory',
   configDir: path.join(__dirname, '../cert'),
   email: 'dan@snapjay.com',
-  // You MUST change these to valid domains
-  // NOTE: all domains will validated and listed on the certificate
   approvedDomains: ['api.door.snapjay.com'],
-  // You MUST NOT build clients that accept the ToS without asking the user
   agreeTos: true,
-  app: require('express')().use('/', function (req, res) {
-    res.setHeader('Content-Type', 'text/html; charset=utf-8')
-    res.end('Hello, World!\n\n💚 🔒.js')
-  }),
-  // Join the community to get notified of important updates
+  app,
   communityMember: true,
-  // Contribute telemetry data to the project
   telemetry: true,
   debug: true
 }).listen(80, 443)
 
 // require('dotenv').config()
 // const path = require('path')
-// const express = require('express')
+
 // const bodyParser = require('body-parser')
 //
-// const app = express()
+
 // const http = require('http')
 // const server = http.Server(app)
 // const io = require('socket.io')(server)
