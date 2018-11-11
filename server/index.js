@@ -8,8 +8,9 @@ const api = require('./api')
 const bodyParser = require('body-parser')
 const express = require('express')
 const app = express()
-// const server = require('http').Server(app)
-// const io = require('socket.io')(server)
+
+const server = require('http').Server(app)
+const io = require('socket.io')(server)
 
 app.use(bodyParser.json()) // support json encoded bodies
 app.use(bodyParser.urlencoded({extended: true})) // support encoded body
@@ -35,7 +36,7 @@ greenLock.create({
   debug: true
 }).listen(process.env.PORT, process.env.S_PORT)
 
-// module.exports = {
-//   server,
-//   io
-// }
+module.exports = {
+  server,
+  io
+}
