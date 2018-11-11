@@ -19,4 +19,4 @@ nohup.out
 .env
 public.angular/
 /.editorconfig
-/cert/accounts/
+/cert/
