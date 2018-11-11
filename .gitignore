@@ -15,9 +15,8 @@ yarn-error.log*
 
 archive
 *.ai
-node_modules
 nohup.out
 .env
 public.angular/
 /.editorconfig
-/.env
+/cert/
