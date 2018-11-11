@@ -1,5 +1,7 @@
 'use strict'
 
+require('dotenv').config()
+const greenLock = require('greenlock-express')
 const path = require('path')
 const api = require('./api')
 
@@ -18,7 +20,7 @@ app.use(function (req, res, next) {
 app.use('/api', api)
 app.use('/', express.static(path.join(__dirname, '../public')))
 
-require('greenlock-express').create({
+greenLock.create({
   version: 'draft-11',
   server: 'https://acme-v02.api.letsencrypt.org/directory',
   configDir: path.join(__dirname, '../cert'),
@@ -29,12 +31,8 @@ require('greenlock-express').create({
   communityMember: true,
   telemetry: true,
   debug: true
-}).listen(80, 443)
+}).listen(process.env.PORT, process.env.S_PORT)
 
-// require('dotenv').config()
-// const path = require('path')
-
-//
 
 // const http = require('http')
 // const server = http.Server(app)
