@@ -28,11 +28,14 @@ require('greenlock-express').create({
   email: 'dan@snapjay.com',
   approvedDomains: ['api.door.snapjay.com'],
   agreeTos: true,
-  app: app,
+  app: require('express')().use('/', function (req, res) {
+    res.setHeader('Content-Type', 'text/html; charset=utf-8')
+    res.end('Hello, World!\n\n💚 🔒.js');
+  }),
   communityMember: true,
   telemetry: true,
   debug: true
-}).listen(8080, 8448)
+}).listen(80, 443)
 
 module.exports = {
   server: server,
