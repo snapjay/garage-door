@@ -9,9 +9,6 @@ const bodyParser = require('body-parser')
 const express = require('express')
 const app = express()
 
-const server = require('http').Server(app)
-const io = require('socket.io')(server)
-
 app.use(bodyParser.json()) // support json encoded bodies
 app.use(bodyParser.urlencoded({extended: true})) // support encoded body
 app.use(function (req, res, next) {
@@ -23,7 +20,7 @@ app.use(function (req, res, next) {
 app.use('/api', api)
 app.use('/', express.static(path.join(__dirname, '../public')))
 
-greenLock.create({
+const server = greenLock.create({
   version: 'draft-11',
   server: 'https://acme-v02.api.letsencrypt.org/directory',
   configDir: path.join(__dirname, '../cert'),
@@ -35,6 +32,10 @@ greenLock.create({
   telemetry: true,
   debug: true
 }).listen(process.env.PORT, process.env.S_PORT)
+
+
+
+const io = require('socket.io')(server)
 
 module.exports = {
   server,
