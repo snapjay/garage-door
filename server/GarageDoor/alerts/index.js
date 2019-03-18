@@ -1,4 +1,5 @@
 const events = require('events')
+
 let Alerts = {}
 
 Alerts.events = new events.EventEmitter() // TODO: Extend into class
