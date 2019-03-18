@@ -10,7 +10,7 @@ class Firebase {
 
     this.db = admin.database()
     this.AlertRef = this.db.ref('alerts')
-    this.ActionRef = this.db.ref('actions')
+    this.LogRef = this.db.ref('logs')
   }
 
   saveAlert (alert) {
@@ -19,12 +19,14 @@ class Firebase {
       alert
     })
   }
-  saveAction (action) {
-    this.ActionRef.push({
+
+  saveLog (type, value) {
+    this.LogRef.push({
       date: admin.database.ServerValue.TIMESTAMP,
-      action
+      type,
+      value
     })
   }
 }
 
-module.exports = Firebase
+module.exports = new Firebase()

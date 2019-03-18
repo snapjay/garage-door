@@ -1,10 +1,15 @@
 const routes = require('express').Router()
 const GarageDoor = require('../GarageDoor/index')
+const Firebase = require('../../server/Respones/Firebase')
 let Hue = require('philips-hue')
 let hue = new Hue()
 
 routes.get('/status', function (req, res) {
   GarageDoor.getStatus((result, error) => {
+    Firebase.saveLog('STATUS', result)
+    if (error) {
+      Firebase.saveLog('ERROR', error)
+    }
     res.json({
       error: error,
       status: result
@@ -14,6 +19,10 @@ routes.get('/status', function (req, res) {
 
 routes.get('/action', function (req, res) {
   GarageDoor.action((result, error) => {
+    Firebase.saveLog('ACTION', result)
+    if (error) {
+      Firebase.saveLog('ERROR', error)
+    }
     res.json({
       error: error,
       status: (result === 'done')
@@ -32,6 +41,7 @@ routes.get('/hue', function (req, res) {
   }
 
   promise.then(function (lights) {
+    Firebase.saveLog('LIGHTS', req.query.state)
     res.json(
       lights)
   })

@@ -8,7 +8,6 @@ require('./server/GarageDoor/alerts/InTransition')
 require('./server/GarageDoor/alerts/NightWatch')
 require('./server/GarageDoor/alerts/HomeAlone')
 
-const firebase = new Firebase()
 GarageDoor.startWatch()
 
 // Subscribe for FirstEvent
@@ -27,5 +26,6 @@ Alerts.events.on('ALERT', (code) => {
 })
 
 Alerts.events.on('ALERT', (code) => {
-  firebase.saveAlert(code)
+  Firebase.saveAlert(code)
+  Firebase.saveLog('ALERT', code)
 })
