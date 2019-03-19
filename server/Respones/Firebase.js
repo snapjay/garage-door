@@ -1,5 +1,5 @@
 const admin = require('firebase-admin')
-const serviceAccount = require('../../garage-door-9135e-firebase-adminsdk-hq82q-f1c50a06c7')
+const serviceAccount = require('../../firebase')
 
 class Firebase {
   constructor () {

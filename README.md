@@ -13,7 +13,7 @@ Get the latest code and install
 * `git clone https://github.com/snapjay/garage-door.git`
 * `sudo npm i --production`
 * `cp .env.example .env`
-*  download amd add the Firebase database credentials file
+*  Download and add the Firebase database credentials file `firebase.json` to root
 * `npm start`
 
 Install as service:
