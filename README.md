@@ -13,6 +13,7 @@ Get the latest code and install
 * `git clone https://github.com/snapjay/garage-door.git`
 * `sudo npm i --production`
 * `cp .env.example .env`
+*  download amd add the Firebase database credentials file
 * `npm start`
 
 Install as service:
@@ -45,7 +46,16 @@ Turn on or off hue lights
 
 * `STATUS_CHANGE` 
 
+has values of:
+* `open` 
+* `closed` 
+* `transition` 
+
 ### Alerts
+
+* `ALERT` 
+
+has values of:
 * `HOME_ALONE` 
 * `DOOR_TRANSITION` 
 * `NIGHT_WATCH` 
