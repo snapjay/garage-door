@@ -27,19 +27,19 @@ if (dev === true) {
   console.log(`http://localhost:${process.env.PORT}`)
 } else {
   const greenLock = require('greenlock-express')
-  console.log(`https://localhost:${process.env.S_PORT}`)
   server = greenLock.create({
     version: 'draft-11',
     server: 'https://acme-v02.api.letsencrypt.org/directory',
     configDir: path.join(__dirname, '../cert'),
     email: 'dan@snapjay.com',
-    approvedDomains: ['dev.api.door.snapjay.com', 'api.door.snapjay.com'],
+    approvedDomains: ['api.door.snapjay.com'],
     agreeTos: true,
     app,
     communityMember: true,
     telemetry: true,
     debug: true
   }).listen(process.env.PORT, process.env.S_PORT)
+  console.log(`https://localhost:${process.env.S_PORT}`)
 }
 
 const io = require('socket.io')(server)
