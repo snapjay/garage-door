@@ -6,7 +6,6 @@ let hue = new Hue()
 
 routes.get('/status', function (req, res) {
   GarageDoor.getStatus((result, error) => {
-    Firebase.saveLog('STATUS', result)
     if (error) {
       Firebase.saveLog('ERROR', error)
     }

@@ -12,7 +12,7 @@ GarageDoor.startWatch()
 
 // Subscribe for FirstEvent
 GarageDoor.events.on('STATUS_CHANGE', (newStatus) => {
-  console.log(`Changed to ${newStatus}`)
+  Firebase.saveLog('STATUS_CHANGE', newStatus)
   SocketIO.sendStatus(newStatus)
 })
 
