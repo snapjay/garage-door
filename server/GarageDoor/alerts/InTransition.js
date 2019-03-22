@@ -6,7 +6,7 @@ let InTransition = {}
 let _timer = null
 
 GarageDoor.events.on('STATUS_CHANGE', (newStatus) => {
-  if (newStatus === 'transition') {
+  if (newStatus === 'TRANSITION') {
     module.exports.startWatch()
   } else {
     module.exports.stopWatch()

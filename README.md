@@ -33,13 +33,14 @@ Commands to interact with service garage
 ## API
 
 `/status`  
-Returns status of door open, closed or transition 
+Returns status of door 'OPEN', 'CLOSED', 'TRANSITION' or 'ERROR' 
 
 `/action`  
 Actions the door
 
 `/hue`  
-`state=on`
+`state=ON`
+`state=OFF`
 Turn on or off hue lights
 
 ## SOCKET
@@ -47,9 +48,9 @@ Turn on or off hue lights
 * `STATUS_CHANGE` 
 
 has values of:
-* `open` 
-* `closed` 
-* `transition` 
+* `OPEN` 
+* `CLOSED` 
+* `TRANSITION` 
 
 ### Alerts
 

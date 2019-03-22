@@ -2,4 +2,4 @@
 # open
 # closed
 # transition
-print("open")
+print("OPEN")

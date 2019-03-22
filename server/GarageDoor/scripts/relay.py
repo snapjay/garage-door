@@ -14,6 +14,6 @@ GPIO.output(RELAYPIN, GPIO.HIGH)
 
 GPIO.cleanup()
 
-print("done")
+print("DONE")
 
 

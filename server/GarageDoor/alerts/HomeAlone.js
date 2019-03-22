@@ -5,7 +5,7 @@ const Alerts = require('./index')
 let HomeAlone = {}
 
 GarageDoor.events.on('STATUS_CHANGE', (newStatus) => {
-  if (newStatus === 'open') {
+  if (newStatus === 'OPEN') {
     module.exports.checkHome()
   }
 })

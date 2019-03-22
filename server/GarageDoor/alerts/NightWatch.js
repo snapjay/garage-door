@@ -9,7 +9,7 @@ rule.hour = Settings.nightCheck.hour
 rule.minute = Settings.nightCheck.minute
 schedule.scheduleJob(rule, function () {
   GarageDoor.getStatus((status) => {
-    if (status === 'open') {
+    if (status === 'OPEN') {
       GarageDoor.action(() => {
         Alerts.emit('NIGHT_WATCH')
       })

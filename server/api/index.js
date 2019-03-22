@@ -24,7 +24,7 @@ routes.get('/action', function (req, res) {
     }
     res.json({
       error: error,
-      status: (result === 'done')
+      status: (result === 'DONE')
     })
   })
 })
@@ -33,9 +33,9 @@ routes.get('/hue', function (req, res) {
   hue.bridge = process.env.HUE_BRIDGE
   hue.username = process.env.HUE_USERNAME
   let promise = Promise
-  if (req.query.state === 'on') {
+  if (req.query.state === 'ON') {
     promise = Promise.all([hue.light(1).on(), hue.light(2).on(), hue.light(3).on()])
-  } else {
+  } else if (req.query.state === 'OFF') {
     promise = Promise.all([hue.light(1).off(), hue.light(2).off(), hue.light(3).off()])
   }
 

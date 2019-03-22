@@ -18,16 +18,16 @@ while True:
     print ('OPEN:' + str(openState) + ' CLOSED: ' + str(closedState))
 
     if openState and closedState:
-        newState = 'transition'
+        newState = 'TRANSITION'
 
     elif closedState:
-        newState = 'closed'
+        newState = 'CLOSED'
 
     elif openState:
-        newState = 'open'
+        newState = 'OPEN'
 
     else:
-        newState = 'error'
+        newState = 'ERROR'
 
     if currentState != newState:
         currentState = newState

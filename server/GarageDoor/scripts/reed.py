@@ -13,13 +13,13 @@ openState = GPIO.input(openPin)
 closedState = GPIO.input(closedPin)
 
 if openState and closedState:
-        print('transition')
+        print('TRANSITION')
 
 elif closedState:
-        print('closed')
+        print('CLOSED')
 
 elif openState:
-        print('open')
+        print('OPEN')
 
 else:
-        print('fail')
+        print('FAIL')

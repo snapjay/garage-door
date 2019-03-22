@@ -17,7 +17,7 @@ GarageDoor.getStatus = function (callback) {
 GarageDoor.action = (callback) => {
   let script = (scriptPath + 'relay.py')
   exec(script, function (error, stdout, stderr) {
-    const result = (stdout.trim() === 'done')
+    const result = (stdout.trim() === 'DONE')
     callback(result, error)
   })
 }

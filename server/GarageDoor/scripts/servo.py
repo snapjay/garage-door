@@ -18,4 +18,4 @@ pwm.ChangeDutyCycle(start)
 pwm.stop()
 GPIO.cleanup()
 
-print("done")
+print("DONE")
