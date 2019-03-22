@@ -26,6 +26,5 @@ Alerts.events.on('ALERT', (code) => {
 })
 
 Alerts.events.on('ALERT', (code) => {
-  Firebase.saveAlert(code)
   Firebase.saveLog('ALERT', code)
 })

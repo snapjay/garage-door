@@ -9,15 +9,7 @@ class Firebase {
     })
 
     this.db = admin.database()
-    this.AlertRef = this.db.ref('alerts')
     this.LogRef = this.db.ref('logs')
-  }
-
-  saveAlert (alert) {
-    this.AlertRef.push({
-      date: admin.database.ServerValue.TIMESTAMP,
-      alert
-    })
   }
 
   saveLog (type, value) {

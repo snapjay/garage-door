@@ -23,7 +23,7 @@ GarageDoor.action = (callback) => {
 }
 
 GarageDoor.startWatch = () => {
-  _timer = setInterval(module.exports.checkStatus, 700)
+  _timer = setInterval(module.exports.checkStatus, 500)
 }
 
 GarageDoor.stopWatch = () => {
