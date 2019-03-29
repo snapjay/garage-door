@@ -21,8 +21,7 @@ app.use('/api', api)
 app.use('/', express.static(path.join(__dirname, '../public')))
 
 let server
-const dev = false
-if (dev === true) {
+if (process.env.ENV === 'DEVELOP') {
   server = app.listen(process.env.PORT)
   console.log(`http://localhost:${process.env.PORT}`)
 } else {
