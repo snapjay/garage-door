@@ -19,12 +19,5 @@ GarageDoor.events.on('STATUS_CHANGE', (newStatus) => {
 // NIGHT_WATCH HOME_ALONE DOOR_TRANSITION DOOR_OPEN
 Alerts.events.on('ALERT', (code) => {
   SocketIO.sendAlert(code)
-  if (code === 'NIGHT_WATCH') {
-    GarageDoor.action(() => {
-    })
-  }
-})
-
-Alerts.events.on('ALERT', (code) => {
   Firebase.saveLog('ALERT', code)
 })
