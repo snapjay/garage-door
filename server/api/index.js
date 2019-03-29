@@ -3,6 +3,7 @@ const GarageDoor = require('../GarageDoor/index')
 const Firebase = require('../../server/Respones/Firebase')
 let Hue = require('philips-hue')
 let hue = new Hue()
+const Settings = require('../settings')
 
 routes.get('/status', function (req, res) {
   GarageDoor.getStatus((result, error) => {
@@ -46,4 +47,7 @@ routes.get('/hue', function (req, res) {
   })
 })
 
+routes.get('/settings', function (req, res) {
+  res.json(Settings)
+})
 module.exports = routes
