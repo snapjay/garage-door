@@ -4,19 +4,27 @@ const serviceAccount = require('../../firebase')
 class Firebase {
   constructor () {
     admin.initializeApp({
-      credential: admin.credential.cert(serviceAccount),
-      databaseURL: 'https://garage-door-9135e.firebaseio.com'
+      credential: admin.credential.cert(serviceAccount)
     })
-
-    this.db = admin.database()
-    this.LogRef = this.db.ref('logs')
+    this.db = admin.firestore()
+    this.logCollection = this.db.collection('logs')
   }
 
   saveLog (type, value) {
-    this.LogRef.push({
-      date: admin.database.ServerValue.TIMESTAMP,
+    return this.logCollection.add({
+      created: admin.firestore.FieldValue.serverTimestamp(),
       type,
       value
+    })
+  }
+
+  getLogs () {
+    return this.logCollection.orderBy('created', 'desc').limit(100).get().then(snapshot => {
+      let build = []
+      snapshot.forEach(doc => {
+        build.push(doc.data())
+      })
+      return build
     })
   }
 }

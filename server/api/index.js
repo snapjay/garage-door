@@ -43,11 +43,16 @@ routes.get('/hue', function (req, res) {
   promise.then(function (lights) {
     Firebase.saveLog('LIGHTS', req.query.state)
     res.json(
-      lights)
+        lights)
   })
 })
 
 routes.get('/settings', function (req, res) {
   res.json(Settings)
 })
+
+routes.get('/logs', function (req, res) {
+  Firebase.getLogs().then((data) => res.json(data))
+})
+
 module.exports = routes
